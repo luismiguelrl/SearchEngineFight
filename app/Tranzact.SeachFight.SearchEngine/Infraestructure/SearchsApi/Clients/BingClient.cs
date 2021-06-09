@@ -12,6 +12,7 @@
 
     public class BingClient : IExternalSearchClient
     {
+        public string SearchEngine { get; set; } = "MSN Search";
         private readonly HttpClient _httpClient;
         private readonly ExternalClientConfiguration externalClientConfiguration;
 

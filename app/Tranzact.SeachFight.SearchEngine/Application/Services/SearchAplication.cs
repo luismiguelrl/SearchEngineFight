@@ -1,7 +1,7 @@
 ﻿namespace Tranzact.SeachFight.SearchEngine.Application.Services
 {
-    using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
     using Tranzact.SeachFight.SearchEngine.Application.Contracts;
@@ -18,18 +18,23 @@
             _externalSearchClients = externalSearchClients;
             taskList = new List<Task<SearchResult>>();
         }
+
         public async Task<List<SearchResult>> GetSearchEngine(List<string> query)
         {
             List<SearchResult> results = new List<SearchResult>();
 
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
             foreach (var language in query)
             {
-                foreach (var client in _externalSearchClients)
-                {
-                    var result = await client.GetCountSearchResultsAsync(language);
-                    results.Add(result);
-                }
+                var tasks = _externalSearchClients.Select(async client =>
+                    results.Add(await client.GetCountSearchResultsAsync(language)));
+
+                await Task.WhenAll(tasks);
             }
+            stopwatch.Stop();
+            var elapsed = stopwatch.ElapsedMilliseconds;
+            Trace.WriteLine($"Total miliseconds ===================> {elapsed}");
 
             return results;
         }

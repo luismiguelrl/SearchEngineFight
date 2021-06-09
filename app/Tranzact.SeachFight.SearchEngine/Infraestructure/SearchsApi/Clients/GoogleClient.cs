@@ -12,6 +12,7 @@
 
     public class GoogleClient : IExternalSearchClient
     {
+        public string SearchEngine { get; set; } = "Google";
         private readonly HttpClient _httpClient;
         private readonly ExternalClientConfiguration externalClientConfiguration;
 

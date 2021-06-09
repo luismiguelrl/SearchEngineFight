@@ -8,6 +8,7 @@
 
     public interface IExternalSearchClient
     {
+        public string SearchEngine { get; set; }
         Task<SearchResult> GetCountSearchResultsAsync(string query);
     }
 }
