@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tranzact.SeachFight.Common\Tranzact.SearchFight.Common.csproj" />
-    <ProjectReference Include="..\Tranzact.SearchFight.Logic\Tranzact.SearchFight.Logic.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Tranzact.SearchFight.Common.Extensions;
 using Tranzact.SearchFight.Common.Util;
-using Tranzact.SearchFight.Logic;
 using Tranzact.SearchFight.Transport.Agents;
 
 namespace Tranzact.SearchFight.UI
@@ -25,6 +24,7 @@ namespace Tranzact.SearchFight.UI
 
             var config = builder.Build();
             string UrlSearchEngineApi = config["SearchEngineApi"];
+            string UrlSearchEngineExecuteApi = config["SearchEngineApiExecute"];
 
             if (args.Length == 0)
             {
@@ -41,9 +41,13 @@ namespace Tranzact.SearchFight.UI
             if (result.IsSuccessStatusCode)
             {
                 var results = result.ContentAsType<List<SearchEngineResponse>>();
-                var resultFight = WinnerCalculate.ExecuteSearchFight(results);
 
-                Console.WriteLine(resultFight);
+                using var httpclientExecuteFight = new HttpClient();
+                var queryExecuteSearhFight = JsonSerializer.Serialize(results);
+                var contentExecuteFight = new StringContent(queryExecuteSearhFight, Encoding.UTF8, "application/json");
+                var resultFight = await httpclientExecuteFight.PostAsync(UrlSearchEngineExecuteApi, contentExecuteFight);
+
+                Console.WriteLine(resultFight.ContentAsType<SearchEngineExecuteResponse>().result);
             }
         }
     }

@@ -8,7 +8,7 @@
     using Tranzact.SeachFight.SearchEngine.Infraestructure.Configuration;
     using Tranzact.SeachFight.SearchEngine.Infraestructure.SearchsApi.Contracts;
     using Tranzact.SeachFight.SearchEngine.Infraestructure.SearchsApi.Model;
-    using Tranzact.SeachFight.SearchEngine.Infraestructure.SearchsApi.Result;
+    using Tranzact.SearchFight.SearchEngine.Infraestructure.SearchsApi.Result;
 
     public class GoogleClient : IExternalSearchClient
     {

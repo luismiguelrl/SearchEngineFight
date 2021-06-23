@@ -2,10 +2,13 @@
 {
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Tranzact.SeachFight.SearchEngine.Application.Contracts;
-    using Tranzact.SeachFight.SearchEngine.Application.Services;
+
     using Tranzact.SeachFight.SearchEngine.Infraestructure.SearchsApi.Clients;
     using Tranzact.SeachFight.SearchEngine.Infraestructure.SearchsApi.Contracts;
+    using Tranzact.SearchFight.SearchEngine.Application.Contracts;
+    using Tranzact.SearchFight.SearchEngine.Application.Services;
+    using Tranzact.SearchFight.SearchEngine.Domain.Contracts;
+    using Tranzact.SearchFight.SearchEngine.Domain.Services;
 
     public static class ServiceCollectionExtension
     {
@@ -21,6 +24,7 @@
                 Configuration.GetSection("ExternalClientConfiguration:BingApiSearch"));
 
             services.AddTransient<ISearchAplication, SearchAplication>();
+            services.AddTransient<ISearchDomain, SearchDomain>();
         }
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace Tranzact.SearchFight.Common.Extensions
+﻿namespace Tranzact.SearchFight.SearchEngine.Infraestructure.Configuration
 {
     using System;
     using System.Collections.Generic;
-
     public static class CollectionExtensions
     {
         public static T MaxValue<T>(this IEnumerable<T> source, Func<T, long> func)
@@ -30,6 +29,6 @@
                 }
                 return maxValue;
             }
-        }        
+        }
     }
 }

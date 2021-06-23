@@ -40,17 +40,25 @@ namespace Tranzact.SearchFight.Logic
 
         public static List<string> SearchFightWinners(List<SearchEngineResponse> searchEngineResponses)
         {
-            var winner = searchEngineResponses.GroupBy(g => g.SearchEngine,
+            var winners = searchEngineResponses
+                .GroupBy(g => g.SearchEngine)
+                .Select(g => new { result = g.OrderBy(c => c.CountResults) })
+                .Select(w => w.result.LastOrDefault());
+
+            var winner = searchEngineResponses
+                .GroupBy(g => g.SearchEngine,
                 r => r, (search, results) => new
                 {
                     SearchEngine = search,
                     Winner = results.MaxValue(c => c.CountResults).Query
                 });
-            return winner.Select(c => $"{c.SearchEngine} winner: {c.Winner}").ToList();
+            //return winner.Select(c => $"{c.SearchEngine} winner: {c.Winner}").ToList();
+            return winners.Select(c => $"{c.SearchEngine} winner: {c.Query}").ToList();
         }
 
         public static string SearchFightTotalWinner(List<SearchEngineResponse> searchEngineResponses)
         {
+
             string totalwinner = searchEngineResponses
                 .GroupBy(r => r.Query, r => r,
                 (query, result) => new
@@ -60,7 +68,24 @@ namespace Tranzact.SearchFight.Logic
                 })
                 .MaxValue(r => r.Total).Query;
 
-            return $"Total winner: {totalwinner}";
+            var data = searchEngineResponses
+                .GroupBy(g => g.Query)
+                .Select(g => new
+                {
+                    Query = g.Key,
+                    Total = g.Sum(r => r.CountResults)
+                })
+                .OrderBy(w => w.Total)
+                .LastOrDefault();
+
+
+            //var data = searchEngineResponses
+            //    .GroupBy(g => g.Query)
+            //    .Select(g => new { Query = g.Key, Total = g.Sum(r => r.CountResults) })
+            //    .OrderBy(r => r.Total)
+            //    .LastOrDefault();
+
+            return $"Total winner: {data.Query}";
         }
     }
 }

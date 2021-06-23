@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Tranzact.SeachFight.SearchEngine.Infraestructure.SearchsApi.Result;
+    using Tranzact.SearchFight.SearchEngine.Infraestructure.SearchsApi.Result;
 
     public interface IExternalSearchClient
     {

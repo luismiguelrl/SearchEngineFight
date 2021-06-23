@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Tranzact.SeachFight.SearchEngine.View.Dto.Request
+namespace Tranzact.SearchFight.SearchEngine.View.Dto.Request
 {
     public class SearchRequest
     {

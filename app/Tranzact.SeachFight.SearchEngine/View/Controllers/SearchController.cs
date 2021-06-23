@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Tranzact.SeachFight.SearchEngine.Application.Contracts;
-using Tranzact.SeachFight.SearchEngine.Infraestructure.SearchsApi.Result;
-using Tranzact.SeachFight.SearchEngine.View.Dto.Request;
-
-namespace Tranzact.SeachFight.SearchEngine.Controllers
+﻿namespace Tranzact.SearchFight.SearchEngine.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Tranzact.SearchFight.SearchEngine.Application.Contracts;
+    using Tranzact.SearchFight.SearchEngine.Infraestructure.SearchsApi.Result;
+    using Tranzact.SearchFight.SearchEngine.View.Dto.Request;
+
     public class SearchController : BaseController
     {
         private readonly ISearchAplication searchAplication;
@@ -22,6 +20,12 @@ namespace Tranzact.SeachFight.SearchEngine.Controllers
         public async Task<List<SearchResult>> SearchEngine(SearchRequest request)
         {
             return await searchAplication.GetSearchEngine(request.languages);
+        }
+
+        [HttpPost]
+        public SearchExecuteEngineResult ExecuteSearchFight(List<SearchEngineRequest> request)
+        {
+            return searchAplication.ExecuteSearchFight(request);            
         }
     }
 }

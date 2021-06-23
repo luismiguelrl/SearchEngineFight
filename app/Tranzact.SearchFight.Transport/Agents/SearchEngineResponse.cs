@@ -5,9 +5,13 @@ using System.Text;
 namespace Tranzact.SearchFight.Transport.Agents
 {
     public class SearchEngineResponse
-    {   
+    {
         public string SearchEngine { get; set; }
         public string Query { get; set; }
         public long CountResults { get; set; }
+    }
+    public class SearchEngineExecuteResponse
+    {
+        public string result { get; set; }
     }
 }

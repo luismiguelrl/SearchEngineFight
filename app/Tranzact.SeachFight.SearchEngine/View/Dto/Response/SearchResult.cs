@@ -1,4 +1,4 @@
-﻿namespace Tranzact.SeachFight.SearchEngine.Infraestructure.SearchsApi.Result
+﻿namespace Tranzact.SearchFight.SearchEngine.Infraestructure.SearchsApi.Result
 {
     using System;
     using System.Collections.Generic;
@@ -10,5 +10,9 @@
         public string SearchEngine { get; set; }
         public string Query { get; set; }
         public long CountResults { get; set; }
+    }
+    public class SearchExecuteEngineResult
+    {
+        public string result { get; set; }
     }
 }
